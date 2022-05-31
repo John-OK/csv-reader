@@ -1,5 +1,5 @@
 import csv
-
+# establish animal class and output template
 class Animal:
     def __init__(self, name, age, breed):
         self.name = name
@@ -7,30 +7,21 @@ class Animal:
         self.breed = breed
 
     def __str__(self):
-        return f"{self.name} is a {self.age} year old {self.breed}"
+        return f"{self.name} is a{self.age} year old{self.breed}"
+# declare function to take in user input and establish animal type
+def show_animals():
+    animal_type = input("What type of animal are you interested in? ")
+    animal = animal_type.lower()
+# with string interpolation, attempt to open file with animal type and return information
+    try: 
+        with open(f"data/{animal}.csv", "r") as file:
+            reader = csv.reader(file)
+            next(reader)
+            for row in reader:
+                print(Animal(row[0],row[1],row[2])) 
 
-animal_type = input("What type of animal are you interested in? ")
-if animal_type.lower() == "dogs":
-    with open("data/dogs.csv", "r") as file:
-    # file = open("data/dogs.csv")
-        reader = csv.reader(file)
-        next(reader)
-        for row in reader:
-            print(Animal(row[0],row[1],row[2])) 
-    # file.close()
+    # catch error if animal type is not found
+    except:
+        print(f"Sorry, we don't have any {animal} here")
 
-elif animal_type.lower() == "cats":
-    with open("data/cats.csv", "r") as file:
-    # file = open("data/cats.csv")
-        reader = csv.reader(file)
-        next(reader)
-        for row in reader:
-            print(Animal(row[0],row[1],row[2]))
-    # file.close()
-
-else:
-    print(f"Sorry, we don't have any {animal_type} here")
-
-
-
-
+show_animals()
