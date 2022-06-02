@@ -1,5 +1,6 @@
 import csv
 # establish animal class and output template
+# (IF TIME ALLOWS, REFACTOR W/O USING CLASS B/X IT'S NOT REALLY THE BEST DATA STRUCTURE)
 class Animal:
     def __init__(self, name, age, breed):
         self.name = name
